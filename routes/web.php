@@ -63,4 +63,8 @@ Route::get('/posts/{post}/delete','\App\Http\Controllers\PostController@delete')
 //Comments
 Route::post('/posts/{post}','\App\Http\Controllers\PostController@comment');
 
+//Like or UnLike
+Route::get('/posts/{post}/like','\App\Http\Controllers\PostController@like');
+Route::get('/posts/{post}/unlike','\App\Http\Controllers\PostController@unlike');
+
 

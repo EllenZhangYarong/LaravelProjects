@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Comment;
+use App\Like;
 
 class PostController extends Controller
 {
@@ -14,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderby('created_at','desc')->withCount("comments")->paginate(6);
+        $posts = Post::orderby('created_at','desc')->withCount(['comments','likes'])->paginate(6);
 
         return view('posts.index', compact('posts'));
     }
@@ -139,5 +140,33 @@ class PostController extends Controller
 
         //Step 3: Render page to front
         return back();
+    }
+
+    public function like(Post $post){
+
+//        dd(\request());
+
+       /* $user_id = \Auth::id();
+
+        $params = array_merge(
+            request(['post_id']),
+            compact('user_id')
+        );
+        \App\Like::create($params);*/
+        $param = [
+            'user_id' => \Auth::id(),
+            'post_id' => $post -> id,
+        ];
+
+        Like::firstOrCreate($param);
+
+        return back();
+
+    }
+    public function unlike(Post $post){
+
+        $post->like(\Auth::id())->delete();
+        return back();
+
     }
 }

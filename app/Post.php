@@ -19,4 +19,13 @@ class Post extends Model
     public function comments(){
         return $this->hasMany('App\Comment')->orderBy('created_at','desc');
     }
+
+    //related with Like, user which has a $user_id like this post or not
+    public function like($user_id){
+        return $this->hasOne('App\Like')->where('user_id',$user_id);
+    }
+
+    public function likes(){
+        return $this->hasMany('App\Like');
+    }
 }
