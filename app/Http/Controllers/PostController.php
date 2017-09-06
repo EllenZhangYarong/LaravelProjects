@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Comment;
 
 class PostController extends Controller
 {
@@ -13,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderby('created_at','desc')->paginate(6);
+        $posts = Post::orderby('created_at','desc')->withCount("comments")->paginate(6);
 
         return view('posts.index', compact('posts'));
     }
@@ -21,7 +22,7 @@ class PostController extends Controller
     //Display one post detail
     public function show(Post $post)
     {
-
+        $post->load("comments");//Pre-load, for better performance
         return view('posts.show', compact('post'));
     }
 
@@ -115,5 +116,28 @@ class PostController extends Controller
         return asset('storage/'.$path);
 //        dd(\request()->all());
 //        echo asset('storage/phpstorm.png');
+    }
+
+    //comment save (Form submit)
+    public function comment(){
+//        dd(\request()->all());
+
+        //Step 1 : Validate form request data
+        $this->validate(\request(),[
+            'post_id'=>'required|exists:posts,id',
+            'content'=>'required|min:3',
+        ]);
+
+        //Step 2 : Business Logic
+        $user_id = \Auth::id();
+
+        $params = array_merge(
+            request(['post_id', 'content']),
+            compact('user_id')
+        );
+        \App\Comment::create($params);
+
+        //Step 3: Render page to front
+        return back();
     }
 }

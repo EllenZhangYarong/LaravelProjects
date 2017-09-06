@@ -15,10 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*
- * Aticle Page
- *
- * */
+
 /*
  * User Login & Register Page
  **/
@@ -38,12 +35,20 @@ Route::get('/user/me/setting','\App\Http\Controllers\UserController@setting');
 //User setting logic
 Route::post('/user/me/setting','\App\Http\Controllers\UserController@settingSave');
 
+/*
+ * Aticle Page
+ *
+ * */
 //List all posts
 Route::get('/posts','\App\Http\Controllers\PostController@index');
 
 //Create a new post and save it
 Route::get('/posts/create','\App\Http\Controllers\PostController@create');
 Route::post('/posts','\App\Http\Controllers\PostController@store');
+
+//upload image
+Route::post('/posts/image/upload','\App\Http\Controllers\PostController@imageUpload');
+
 
 //Display one post detail
 Route::get('/posts/{post}','\App\Http\Controllers\PostController@show');
@@ -55,6 +60,7 @@ Route::put('/posts/{post}','\App\Http\Controllers\PostController@update');
 //Delete a post
 Route::get('/posts/{post}/delete','\App\Http\Controllers\PostController@delete');
 
-//upload image
-Route::post('/posts/image/upload','\App\Http\Controllers\PostController@imageUpload');
+//Comments
+Route::post('/posts/{post}','\App\Http\Controllers\PostController@comment');
+
 

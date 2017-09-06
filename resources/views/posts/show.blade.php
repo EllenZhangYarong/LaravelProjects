@@ -32,14 +32,17 @@
                 <div class="panel-heading">评论</div>
 
                 <!-- List group -->
+                @foreach($post -> comments as $comment )
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <h5>2017-05-28 10:15:08 by Kassandra Ankunding2</h5>
+                        <h5>{{$comment->created_at->toFormattedDateString()}} by {{$comment->user->name}}</h5>
                         <div>
-                            这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论
+                            {{$comment->content}}
                         </div>
                     </li>
                 </ul>
+                @endforeach
+
             </div>
 
             <div class="panel panel-default">
@@ -49,8 +52,8 @@
                 <!-- List group -->
                 <ul class="list-group">
                     <form action="/posts/comment" method="post">
-                        <input type="hidden" name="_token" value="4BfTBDF90Mjp8hdoie6QGDPJF2J5AgmpsC9ddFHD">
-                        <input type="hidden" name="post_id" value="62"/>
+                        {{csrf_field()}}
+                        <input type="hidden" name="post_id" value="{{$post->id}}"/>
                         <li class="list-group-item">
                             <textarea name="content" class="form-control" rows="10"></textarea>
                             <button class="btn btn-default" type="submit">提交</button>
