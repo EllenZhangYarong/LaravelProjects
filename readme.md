@@ -10,3 +10,5 @@ A project under Laravel5.4 framework.
 
 ![PHP Cover] (phpcover.jpg)
 ![PHP back] (phpback.jpg)
+![PHP Cover](phpcover.jpg)
+Format: ![Alt Text](url)
