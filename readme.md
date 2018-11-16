@@ -6,3 +6,7 @@ A project under Laravel5.4 framework.
 - [Timestamp Format](http://carbon.nesbot.com/docs)
 - [Data Fill](http://github.com/fzaninotto/Faker)
 - [Laravel Cheat Sheet](http://cheats.jesse-obrien.ca/)
+
+
+![PHP Cover]('phpcover.jpg')
+![PHP back]('phpback.jpg')
