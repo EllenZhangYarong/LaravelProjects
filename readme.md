@@ -8,5 +8,5 @@ A project under Laravel5.4 framework.
 - [Laravel Cheat Sheet](http://cheats.jesse-obrien.ca/)
 
 
-![PHP Cover] (./phpcover.jpg)
-![PHP back] (./phpback.jpg)
+![PHP Cover] (phpcover.jpg)
+![PHP back] (phpback.jpg)
